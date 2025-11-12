@@ -2,18 +2,18 @@
 
 import { motion } from "framer-motion"
 import { useInView } from "framer-motion"
-import { useRef, forwardRef } from "react"
+import { useRef, forwardRef, createElement, ElementType } from "react"
 import { cn } from "@/lib/utils"
 
 interface TimelineContentProps extends React.HTMLAttributes<HTMLDivElement> {
   animationNum: number
   timelineRef: React.RefObject<HTMLElement | HTMLDivElement | null>
   customVariants?: any
-  as?: any
+  as?: ElementType
 }
 
 export const TimelineContent = forwardRef<HTMLDivElement, TimelineContentProps>(
-  ({ children, animationNum, timelineRef, customVariants, as: Component = "div", className, ...props }, ref) => {
+  ({ children, animationNum, timelineRef, customVariants, as = "div", className, ...props }, ref) => {
     const elementRef = useRef(null)
     const isInView = useInView(elementRef, { once: true, margin: "-100px" })
 
@@ -30,20 +30,20 @@ export const TimelineContent = forwardRef<HTMLDivElement, TimelineContentProps>(
     }
 
     const variants = customVariants || defaultVariants
+    const MotionComponent = motion[as as keyof typeof motion] || motion.div
 
-    return (
-      <motion.div
-        ref={elementRef}
-        custom={animationNum}
-        initial="hidden"
-        animate={isInView ? "visible" : "hidden"}
-        variants={variants}
-        className={cn(className)}
-        as={Component}
-        {...props}
-      >
-        {children}
-      </motion.div>
+    return createElement(
+      MotionComponent as any,
+      {
+        ref: elementRef,
+        custom: animationNum,
+        initial: "hidden",
+        animate: isInView ? "visible" : "hidden",
+        variants: variants,
+        className: cn(className),
+        ...props,
+      },
+      children
     )
   }
 )
