@@ -15,6 +15,7 @@ A modern, animated video editor hiring platform built with Next.js 14, TypeScrip
 - **Fully Responsive**: Works seamlessly on mobile, tablet, and desktop
 - **TypeScript**: Type-safe codebase with zero errors
 - **Modern Stack**: Next.js 14 App Router, Tailwind CSS 4, Framer Motion
+- **Analytics Built-in**: Vercel Analytics and Speed Insights for tracking visitors and performance
 
 ## 🚀 Quick Start
 
@@ -124,6 +125,7 @@ The project uses Tailwind CSS. Key color classes:
 - **UI Components**: Custom components following shadcn/ui patterns
 - **Particles**: [@tsparticles/react](https://particles.js.org/)
 - **Number Animations**: [@number-flow/react](https://number-flow.barvian.me/)
+- **Analytics**: [@vercel/analytics](https://vercel.com/analytics) & [@vercel/speed-insights](https://vercel.com/docs/speed-insights)
 
 ## 📦 Dependencies
 
